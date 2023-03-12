@@ -15,17 +15,11 @@ const calculateOrderAmount = (orderItems) => {
 exports.createOrder = async (req, res) => {
   try {
     const { user, deliveryAddress, orderStatus, orderItems } = req.body;
-    console.log("orderItems", JSON.stringify(orderItems, null, 2));
     const orderAmount = calculateOrderAmount(orderItems);
-    console.log("orderAmount", JSON.stringify(orderAmount, null, 2));
     const paymentIntent = await stripe.paymentIntents.create({
       amount: orderAmount,
       currency: "inr",
     });
-    console.log(
-      `paymentIntent in create order`,
-      JSON.stringify(paymentIntent, null, 2)
-    );
     const paymentIntentId = paymentIntent.id;
     const order = await Order.create({
       user,
@@ -54,7 +48,6 @@ exports.getOrders = async (req, res) => {
     const orders = await Order.find({});
     res.send(orders);
   } catch (error) {
-    console.log("error in getOrders", error);
     res.send("Something went wrong in getOrders");
   }
 };

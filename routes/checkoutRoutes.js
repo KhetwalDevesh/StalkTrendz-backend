@@ -30,7 +30,6 @@ const app = express();
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 let endpointSecret;
-// endpointSecret = "whsec_7847e6bd056f1e0ef6521e4b161f91912a0caad833a13bf67c8c385aa17f5fab";
 
 module.exports = router;
 // app.listen(4242, () => console.log("Running on port 4242"));

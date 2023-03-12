@@ -4,8 +4,6 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.stripeCheckout = async (req, res) => {
   try {
-    console.log("req.body", JSON.stringify(req.body.serverCartItems, null, 2));
-    console.log("req.body", JSON.stringify(req.body, null, 2));
     let line_items_array = [];
     req.body.serverCartItems.map((cartItem) => {
       const new_line_item = {
@@ -27,7 +25,6 @@ exports.stripeCheckout = async (req, res) => {
       cancel_url: `http://localhost:${process.env.PORT}/cancel`,
     });
     res.send(session);
-    console.log("session.url", JSON.stringify(session.url, null, 2));
   } catch (error) {
     console.log(error);
   }
